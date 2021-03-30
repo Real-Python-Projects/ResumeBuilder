@@ -7,11 +7,12 @@ User = get_user_model()
 
 class UserResume(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE)
+    title = models.CharField(max_length=255)
     
     def get_user_personal_data(self):
         return PersonalData.objects.filter(user=self.user)
     
-    def get_user_career_personal_data(self):
+    def get_user_career_objective(self):
         return CareerObjective.objects.filter(user=self.user)
     
     def get_user_educational_background(self):
@@ -38,6 +39,7 @@ class UserResume(models.Model):
 
 class PersonalData(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    resume = models.ForeignKey(UserResume, on_delete=models.CASCADE, blank=True, null=True) 
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     nationality = models.CharField(max_length=256)
@@ -52,22 +54,24 @@ class PersonalData(models.Model):
     
 class CareerObjective(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    resume = models.ForeignKey(UserResume, on_delete=models.CASCADE, blank=True, null=True) 
     content = models.TextField()
     
     def __str__(self):
-        return self.user
+        return self.user.username
 
 class EducationBackground(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    resume = models.ForeignKey(UserResume, on_delete=models.CASCADE, blank=True, null=True) 
     start_date = models.DateTimeField()
     done_date = models.DateTimeField()
     institution = models.CharField(max_length=255)
     
     def __str__(self):
         return self.user.username
-
 class OtherQualification(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    resume = models.ForeignKey(UserResume, on_delete=models.CASCADE, blank=True, null=True) 
     start_date = models.DateTimeField()
     done_date = models.DateTimeField()
     institution = models.CharField(max_length=255)
@@ -77,6 +81,7 @@ class OtherQualification(models.Model):
     
 class Employment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    resume = models.ForeignKey(UserResume, on_delete=models.CASCADE, blank=True, null=True) 
     start_date = models.DateTimeField()
     done_date = models.DateTimeField()
     responsibility = models.CharField(max_length=255)
@@ -88,6 +93,7 @@ class Employment(models.Model):
     
 class Skills(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    resume = models.ForeignKey(UserResume, on_delete=models.CASCADE, blank=True, null=True) 
     skill = models.CharField(max_length=255)
     
     def __str__(self):
@@ -95,6 +101,7 @@ class Skills(models.Model):
     
 class Interest(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    resume = models.ForeignKey(UserResume, on_delete=models.CASCADE, blank=True, null=True) 
     interest = models.TextField()
     
     def __str__(self):
@@ -102,6 +109,7 @@ class Interest(models.Model):
     
 class References(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    resume = models.ForeignKey(UserResume, on_delete=models.CASCADE, blank=True, null=True) 
     title = models.CharField(max_length=255)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
