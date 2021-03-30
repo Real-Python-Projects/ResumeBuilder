@@ -1,13 +1,16 @@
 {% extends 'base.html' %}
-
+{% load static %}
 
 {% block title %}
-    {{}} Resume
+    {{ personal_data.first_name }} Resume
 {% endblock title %}
 
 
 {% block body %}
     {{ personal_data.first_name }}
+
+    A lot of staff here {{ username }}{{personal_data.first_name}}<br>
+    {{ career_objective.content }}
 {% endblock body %}
     
     

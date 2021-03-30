@@ -6,7 +6,7 @@ User = get_user_model()
 
 
 class UserResume(models.Model):
-    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    user = models.OneToOneField(User, on_delete = models.CASCADE)
     title = models.CharField(max_length=255)
     
     def get_user_personal_data(self):
