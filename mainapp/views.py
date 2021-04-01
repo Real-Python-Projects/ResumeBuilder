@@ -210,3 +210,5 @@ def ResumeView(request, *args, **kwargs):
             'username':request.user.username,
         }
         return render(request, 'pdfOutput.html', context)
+    else:
+        return render(request, 'auth/register.html')
