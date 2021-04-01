@@ -200,12 +200,13 @@ def GeneratePdf(request):
     return response
 
 def ResumeView(request, *args, **kwargs):
-    personal_data = get_object_or_404(PersonalData, user=request.user)
-    resume1 = get_object_or_404(UserResume, user=request.user)
-    print(personal_data)
-    
-    context = {
-        'personal_data':personal_data,
-        'username':request.user.username,
-    }
-    return render(request, 'pdfOutput.html', context)
+    if request.user.is_authenticated:
+        personal_data = get_object_or_404(PersonalData, user=request.user)
+        resume1 = get_object_or_404(UserResume, user=request.user)
+        print(personal_data)
+
+        context = {
+            'personal_data':personal_data,
+            'username':request.user.username,
+        }
+        return render(request, 'pdfOutput.html', context)
