@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    Step2-Personal Data
+{% endblock title %}
+
+
+
+{% block body %}
+<div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
+    <div class="card card0 border-0">
+        <div class="row d-flex">
+            <div class="col-lg-6">
+                <div class="card1 pb-5">
+                    <div class="row"> <img src="{% static 'images/img1.png' %}" class="logo"> </div>
+                    <div class="row px-3 justify-content-center mt-4 mb-5 border-line"> <img src="{% static 'images/img2.png' %}" class="image"> </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card2 card border-0 px-4 py-5">
+                    <div class="row mb-4 px-3">
+                        <h4 class="mb-0 mr-4 mt-2">Personal Data: <span>Step 1</span></h4>
+                    </div>
+                    <div class="row px-3 mb-4">
+                        <div class="line"></div>
+                    </div>
+                    <form action="" method="post">{% csrf_token %}
+                        {% include 'partials/messages.html' %}
+                        <div class="row px-3"> <label class="mb-1">
+                                <h5 class="mb-0 text-">first_name</h5>
+                            </label> <input class="mb-4" type="text" name="first_name" placeholder="Enter Your Firstname"> 
+                        </div>
+
+                        <div class="row px-3"> <label class="mb-1">
+                            <h5 class="mb-0 text-">last_name</h5>
+                        </label> <input class="mb-4" type="text" name="last_name" placeholder="Enter the Name of Lastname"> 
+                        </div>
+
+                        <div class="row px-3"> <label class="mb-1">
+                            <h5 class="mb-0 text-">Nationality</h5>
+                        </label> <input class="mb-4" type="text" name="nation" placeholder="Enter your Nationality"> 
+                        </div>
+
+                        <div class="row px-3"> <label class="mb-1">
+                            <h5 class="mb-0 text-">Id Number</h5>
+                        </label> <input class="mb-4" type="number" name="id_no" placeholder="Enter your ID number"> 
+                        </div>
+                    
+                        <div class="row px-3"> <label class="mb-1">
+                            <h5 class="mb-0 text-">Address Code</h5>
+                        </label> <input class="mb-4" type="number" name="address_code" placeholder="eg. 80305"> 
+                        </div>
+
+                        <div class="row px-3"> <label class="mb-1">
+                            <h5 class="mb-0 text-">Address Box</h5>
+                        </label> <input class="mb-4" type="number" name="address_box" placeholder="e.g 47"> 
+                        </div>
+
+                        <div class="row px-3"> <label class="mb-1">
+                            <h5 class="mb-0 text-">Tel No</h5>
+                        </label> <input class="mb-4" type="number" name="tel_no" placeholder="e.g 0712860997"> 
+                        </div>
+
+                        <div class="row px-3"> <label class="mb-1">
+                            <h5 class="mb-0 text-">Email</h5>
+                        </label> <input class="mb-4" type="email" name="email" placeholder="Enter your Email Address"> 
+                        </div>
+
+                        <div class="row mb-3 px-3"> <button type="submit" class="btn btn-blue text-center">Next</button> </div>
+                    </form>
+                    <div class="row mb-4 px-3"> <small class="font-weight-bold">See Output <a href="#" class="text-danger ">here</a></small> </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-blue py-4">
+            <div class="row px-3"> <small class="ml-4 ml-sm-5 mb-2">Copyright &copy; 2019. All rights reserved.</small>
+                <div class="social-contact ml-4 ml-sm-auto"> <span class="fa fa-facebook mr-4 text-sm"></span> <span class="fa fa-google-plus mr-4 text-sm"></span> <span class="fa fa-linkedin mr-4 text-sm"></span> <span class="fa fa-twitter mr-4 mr-sm-5 text-sm"></span> </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
+    
+
+    

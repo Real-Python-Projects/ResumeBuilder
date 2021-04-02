@@ -16,13 +16,25 @@ from django.db.models import ObjectDoesNotExist
 def IndexView(request, *args, **kwargs):
     return render(request, 'index.html')
 
+def CreateResumeView(request, *args, **kwargs):
+    if request.method == 'POST':
+        title = request.POST['title']
+        
+        userResume = UserResume.objects.create(
+            user = request.user,
+            title = title,
+        )
+        userResume.save()
+        return render(request, 'resume-forms/create-personal-data.html  ')
+    return render(request, 'resume-forms/create-resume-form.html')
+
 def CreatePDataView(request, *args, **kwargs):
     if request.method == 'POST':
         user = request.user
         resume = UserResume.objects.get(user=user)
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
-        nationality = request.POST['nationality']
+        nationality = request.POST['nation']
         id_no = request.POST['id_no']
         address_code = request.POST['address_code']
         address_box = request.POST['address_box']
@@ -37,13 +49,13 @@ def CreatePDataView(request, *args, **kwargs):
             nationality = nationality,
             id_no = id_no,
             address_code = address_code,
-            address_box = address_box,
+            adress_box = address_box,
             tel_no = tel_no,
             email = email
         )
         pData.save()
-        return HttpResponseRedirect()
-    return render(request, 'personal_data.html')
+        return HttpResponseRedirect('mainapp:create-career')
+    return render(request, 'resume-forms/create-personal-data.html')
 
 def CreateCareerObjectiveView(request, *args, **kwargs):
     if request.method == 'POST':
@@ -56,7 +68,7 @@ def CreateCareerObjectiveView(request, *args, **kwargs):
             content = content
         )
         carObjective.save()
-        return HttpResponseRedirect()
+        return HttpResponseRedirect('')
     return render(request, 'career_objective.html')
 
 def CreateEducationBackgroundView(request, *args, **kwargs):
@@ -219,6 +231,7 @@ def ResumeView(request, *args, **kwargs):
     except ObjectDoesNotExist:
         return render(request, 'resume-forms/create-resume-form.html')
 
-
+# def Handle404(request, exception):
+#     return render(request, '404.html')
 
 
