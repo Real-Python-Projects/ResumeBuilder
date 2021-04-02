@@ -10,5 +10,6 @@ urlpatterns = [
     path('form-title/', CreateResumeView, name='create-resume'),
     path('create-personal-data/', CreatePDataView, name='create-personal-data'),
     path('create-career/', CreateCareerObjectiveView, name='create-career'),
+    path('create-education-background/', CreateEducationBackgroundView, name='create-ed-background'),
 
 ]

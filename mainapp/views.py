@@ -54,7 +54,7 @@ def CreatePDataView(request, *args, **kwargs):
             email = email
         )
         pData.save()
-        return HttpResponseRedirect('mainapp:create-career')
+        return render(request, 'resume-forms/create-career-objective.html')
     return render(request, 'resume-forms/create-personal-data.html')
 
 def CreateCareerObjectiveView(request, *args, **kwargs):
@@ -69,7 +69,7 @@ def CreateCareerObjectiveView(request, *args, **kwargs):
         )
         carObjective.save()
         return HttpResponseRedirect('')
-    return render(request, 'career_objective.html')
+    return render(request, 'resume-forms/create-career-objective.html')
 
 def CreateEducationBackgroundView(request, *args, **kwargs):
     if request.method == 'POST':
@@ -86,7 +86,7 @@ def CreateEducationBackgroundView(request, *args, **kwargs):
         )
         edBackground.save()
         return HttpResponseRedirect()
-    return render(request, 'edu-background-form.html')
+    return render(request, 'resume-forms/create-ed-background.html')
 
 def CreateOtherQualificationView(request, *args, **kwargs):
     if request.method == 'POST':
