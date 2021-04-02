@@ -8,6 +8,8 @@ from weasyprint import HTML
 import tempfile
 from django.http import HttpResponse
 from django.template.loader import render_to_string
+from django.contrib.auth.decorators import login_required
+from django.db.models import ObjectDoesNotExist
 # Create your views here.
 
 
@@ -164,7 +166,7 @@ def CreateReferenceView(request, *args, **kwargs):
         return HttpResponseRedirect()
     return render(request, 'references-form.html')
 
-def GeneratePdf(request):
+def GeneratePdf(request, *args, **kwargs):
     resume = get_object_or_404(UserResume, user=request.user)
     
     personal_data = get_object_or_404(PersonalData, user=request.user)
@@ -199,16 +201,24 @@ def GeneratePdf(request):
         response.write(output.read())
     return response
 
-def ResumeView(request, *args, **kwargs):
-    if request.user.is_authenticated:
-        personal_data = get_object_or_404(PersonalData, user=request.user)
-        resume1 = get_object_or_404(UserResume, user=request.user)
-        print(personal_data)
 
-        context = {
-            'personal_data':personal_data,
-            'username':request.user.username,
-        }
-        return render(request, 'pdfOutput.html', context)
-    else:
-        return render(request, 'auth/register.html')
+@login_required
+def ResumeView(request, *args, **kwargs):
+    try:
+        resume = UserResume.objects.get(user=request.user)
+
+        if resume.exists():
+            personal_data = get_object_or_404(PersonalData, user=request.user) or None
+
+            context = {
+                'personal_data':personal_data,
+                'username':request.user.username,
+            }
+            return render(request, 'pdfOutput.html')
+    
+    except ObjectDoesNotExist:
+        return render(request, 'resume-forms/create-resume-form.html')
+
+
+
+

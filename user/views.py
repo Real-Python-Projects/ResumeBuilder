@@ -44,7 +44,7 @@ def LogInView(request, *args, **kwargs):
         if user is not None:
             login(request, user)
             messages.info(request, "You have successfully logged in")
-            return redirect('retechecommerce:index')
+            return redirect('mainapp:resume')
         else:
             messages.error(request,"Ivalid Login")
             return render(request,'auth/login.html')
