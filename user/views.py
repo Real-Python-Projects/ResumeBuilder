@@ -38,6 +38,7 @@ def LogInView(request, *args, **kwargs):
             messages.error(request, "Username required")
         if password == "":
             messages.error(request, "Password is required")
+            return render(request,'auth/login.html')
         
         user = authenticate(request, username=username, password=password)
             
@@ -46,7 +47,7 @@ def LogInView(request, *args, **kwargs):
             messages.info(request, "You have successfully logged in")
             return redirect('mainapp:resume')
         else:
-            messages.error(request,"Ivalid Login")
+            messages.error(request,"Ivalid Login or Your account is not activated")
             return render(request,'auth/login.html')
     return render(request, 'auth/login.html', {})
 
@@ -58,10 +59,10 @@ def LogOutView(request, *args, **kwargs):
 def RegisterView(request):
     
     if request.method == 'POST':
-            username = request.POST.get('username')
-            email = request.POST.get('email')
-            password1 = request.POST.get('password1')
-            password2 = request.POST.get('password2')
+            username = request.POST['username']
+            email = request.POST['email']
+            password1 = request.POST['password1']
+            password2 = request.POST['password2']
             
             
             if username == "":
@@ -117,7 +118,7 @@ def RegisterView(request):
                 
                 mail_body = f"hi {user.username} click the link below to verify your account\n {activate_url}"
                 mail = send_mail (mail_subject, mail_body,'noreply@retech.com',[email], fail_silently=False)
-                messages.success(request, "User has been created")
+                messages.success(request, "Successfull, a link has been sent to validate your account")
                 return redirect('user:login')
             
     return render(request, 'auth/register.html', {})
