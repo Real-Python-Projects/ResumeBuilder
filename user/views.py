@@ -53,7 +53,7 @@ def LogInView(request, *args, **kwargs):
 def LogOutView(request, *args, **kwargs):
     logout(request)
     messages.success(request,"You have successfully Logged Out")
-    return redirect('retechecommerce:index')
+    return redirect('user:index')
 
 def RegisterView(request):
     

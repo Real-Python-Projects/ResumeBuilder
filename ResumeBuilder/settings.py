@@ -135,4 +135,4 @@ EMAIL_USE_TLS = True #This is for encription
 EMAIL_PORT = 587
 
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = 'user:login'

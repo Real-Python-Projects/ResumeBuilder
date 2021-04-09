@@ -219,14 +219,16 @@ def ResumeView(request, *args, **kwargs):
     try:
         resume = UserResume.objects.get(user=request.user)
 
-        if resume.exists():
-            personal_data = get_object_or_404(PersonalData, user=request.user) or None
+        if resume:
+            personal_data = get_object_or_404(PersonalData, user=request.user)
 
             context = {
                 'personal_data':personal_data,
                 'username':request.user.username,
             }
             return render(request, 'pdfOutput.html')
+        else:
+            return render(request, 'resume-forms/create-resume-form.html')
     
     except ObjectDoesNotExist:
         return render(request, 'resume-forms/create-resume-form.html')
